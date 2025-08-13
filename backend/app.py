@@ -28,7 +28,9 @@ def generate_short_code(length=6):
 def shorten_url(request: URLRequest):
     code = generate_short_code()
     url_store[code] = str(request.url)
-    return {"short_url": f"http://localhost:8000/{code}"}
+    # return {"short_url": f"http://localhost:8000/{code}"}
+    return {"short_url": f"https://demo-1-wngg.onrender.com/shorten/{code}"}
+    
 
 @app.get("/{code}")
 def redirect_url(code: str):
