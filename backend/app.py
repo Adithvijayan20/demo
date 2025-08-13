@@ -24,12 +24,19 @@ class URLRequest(BaseModel):
 def generate_short_code(length=6):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
+# @app.post("/shorten")
+# def shorten_url(request: URLRequest):
+#     code = generate_short_code()
+#     url_store[code] = str(request.url)
+#     return {"short_url": f"http://localhost:8000/{code}"}
+
 @app.post("/shorten")
-def shorten_url(request: URLRequest):
+def shorten_url(request: Request, data: URLRequest):
     code = generate_short_code()
-    url_store[code] = str(request.url)
-    # return {"short_url": f"http://localhost:8000/{code}"}
-    return {"short_url": f"https://demo-1-wngg.onrender.com/shorten/{code}"}
+    url_store[code] = str(data.url)
+    base_url = str(request.base_url)  # automatically gets your deployed URL
+    return {"short_url": f"{base_url}{code}"}
+    
     
 
 @app.get("/{code}")
