@@ -9,7 +9,7 @@ function ShortenerForm({ onShorten }) {
     setLoading(true);
     try {
       // const res = await fetch("http://localhost:8000/shorten", {
-      const res = await fetch("https://demo-1-wngg.onrender.com/shorten", {
+      const res = await fetch("https:/shorten", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
