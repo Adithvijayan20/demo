@@ -3,7 +3,7 @@ from pydantic import BaseModel, HttpUrl
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 import string, random
-
+from fastapi import Request
 app = FastAPI()
 
 # Enable CORS for React frontend
