@@ -30,13 +30,20 @@ def generate_short_code(length=6):
 #     url_store[code] = str(request.url)
 #     return {"short_url": f"http://localhost:8000/{code}"}
 
+# @app.post("/shorten")
+# def shorten_url(request: Request, data: URLRequest):
+#     code = generate_short_code()
+#     url_store[code] = str(data.url)
+#     base_url = str(request.base_url)  # automatically gets your deployed URL
+#     return {"short_url": f"{base_url}{code}"}
+
 @app.post("/shorten")
-def shorten_url(request: Request, data: URLRequest):
+def shorten_url(data: URLRequest):
     code = generate_short_code()
     url_store[code] = str(data.url)
-    base_url = str(request.base_url)  # automatically gets your deployed URL
-    return {"short_url": f"{base_url}{code}"}
-    
+    # Only return the shortened part
+    return {"short_code": code, "short_path": f"/{code}"}
+
     
 
 @app.get("/{code}")
